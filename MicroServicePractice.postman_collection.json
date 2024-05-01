@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "cf005436-b1b5-4c6f-8535-4583fc0f4c5b",
+		"name": "MicroServicePractice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13397013"
+	},
+	"item": [
+		{
+			"name": "Post-AService",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"for(var i=0; i<=100;i++){\r",
+							"pm.sendRequest('http://localhost:8888/service/a/get', function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.log(err);\r",
+							"    } else {\r",
+							"      // console.log(response.json().method+\" \"+response.json().status)\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/service/a/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"service",
+						"a",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-AService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"waitTime\": \"100\",\r\n    \"decision\": \"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/service/a/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"service",
+						"a",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-AService-cpy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/service/a/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"service",
+						"a",
+						"get"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
