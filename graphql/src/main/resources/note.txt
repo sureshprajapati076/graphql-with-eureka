@@ -1,0 +1,16 @@
+enable below property in applicaiton.properties file to enable graphql ui
+
+spring.graphql.graphiql.enabled=true
+
+
+spring.graphql.path=/service/api/query   This property will override default /graphql url
+
+so now from POSTMAN we can hit http://localhost:9090/service/api/query and pass graphql query as reqest body for POST method.
+
+sample log:
+
+2024-04-30T13:39:59.597-07:00  INFO 2880 --- [           main] s.b.a.g.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint HTTP POST /service/api/query
+2024-04-30T13:39:59.751-07:00  INFO 2880 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9090 (http) with context path ''
+2024-04-30T13:39:59.762-07:00  INFO 2880 --- [           main] com.graphql.app.AppApplication           : Started AppApplication in 3.146 seconds (process running for 3.528)
+
+
