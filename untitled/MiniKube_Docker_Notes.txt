@@ -1,0 +1,106 @@
+
+minikube delete  << Run this if you want to start minikube from beginning >>
+
+ for windows: minikube start --driver=docker  OR minikube start --driver=hyperv
+
+  for mac: minikube start
+
+ make sure docker is running.
+
+docker build -t springboot-k8s-example:1.0 .
+
+        make sure to provide this name springboot-k8s-example:1.0 in deployment.yml
+
+        docker run -p 9090:9090 springboot-k8s-example:1.0  -> run docker image
+
+    docker images
+
+need to load image in minikube (in kubectl its not required)
+
+ minikube image load springboot-k8s-example:1.0 (may require >> docker context use default)
+
+CREATE DEPLOYMENTS:
+
+kubectl apply -f .\deployment.yml
+ kubectl get deployments
+ kubectl get pods
+
+  kubectl logs <podname>
+
+
+kubectl get configmap -> to see configmap
+
+
+CREATE SERVICE: (expose to outer world, we can hit request to microservice via this service)
+
+kubectl apply -f .\service.yml
+
+kubectl get services
+
+------------------------------------------------------------------------------
+PS C:\Users\sures\Downloads\minikube\minikube> kubectl get services
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes           ClusterIP   10.96.0.1      <none>        443/TCP          21m
+springboot-k8s-svc   NodePort    10.108.52.47   <none>        9090:30115/TCP   4s
+
+-------------------------------------------------------------------------------
+
+here 30115 is the port number
+
+verify node:  kubectl get nodes -o wide
+
+minikube ip
+
+
+----------------------------------------
+
+if above way is not working. try below: its working during this making repo
+
+minikube service <service name>
+
+
+PS C:\Users\sures\Downloads\minikube\minikube> minikube service springboot-k8s-svc
+|-----------|--------------------|-------------|---------------------------|
+| NAMESPACE |        NAME        | TARGET PORT |            URL            |
+|-----------|--------------------|-------------|---------------------------|
+| default   | springboot-k8s-svc |        9090 | http://192.168.49.2:30115 |
+|-----------|--------------------|-------------|---------------------------|
+* Starting tunnel for service springboot-k8s-svc.
+|-----------|--------------------|-------------|------------------------|
+| NAMESPACE |        NAME        | TARGET PORT |          URL           |
+|-----------|--------------------|-------------|------------------------|
+| default   | springboot-k8s-svc |             | http://127.0.0.1:62443 |
+|-----------|--------------------|-------------|------------------------|
+* Opening service default/springboot-k8s-svc in default browser...
+! Because you are using a Docker driver on windows, the terminal needs to be open to run it.minikube start --driver=hyperv
+
+
+DASHBOARD: minikube dashboard   (it make take some time to load)
+
+http://127.0.0.1:62443/ will give output
+
+curl http://127.0.0.1:62443/
+
+
+PS C:\Users\sures\Downloads\minikube\minikube> curl http://127.0.0.1:62443/
+
+
+StatusCode        : 200
+StatusDescription :
+Content           : HELLO from docker minikube
+RawContent        : HTTP/1.1 200
+
+
+
+-----------------------------------------
+
+
+
+
+DELETING:
+
+ kubectl delete deployments <deployment name>
+
+ kubectl delete pod <pod name>
+
+ kubectl delete service <service name>
