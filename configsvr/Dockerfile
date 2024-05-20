@@ -7,5 +7,5 @@ RUN mvn clean install
 FROM openjdk:17-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-EXPOSE 9090
+EXPOSE 9871
 ENTRYPOINT ["java","-jar","/app.jar"]
