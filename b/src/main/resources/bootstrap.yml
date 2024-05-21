@@ -6,8 +6,8 @@ spring:
       - prod
   config:
     name: ${spring.application.name}
-#server:
-#  port: 8082
+server:
+  port: 9999
 eureka:
   client:
     register-with-eureka: true
