@@ -2,8 +2,8 @@
 spring:
   application:
     name: SERVICE-A
-server:
-  port: 8081
   config:
     name: ${spring.application.name}
     import: optional:configserver:http://config-svr-svc:9871  #config-svr-svc is name of Config service in deployment.yaml in configsvc project
+server:
+  port: 8081
